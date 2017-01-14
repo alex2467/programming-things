@@ -47,7 +47,6 @@ void setup() {
      .setSize(50,50)
      ;
   
-  // and add another 2 buttons
   cp5.addButton("Left")
      .setValue(100)
      .setPosition(135,155)
@@ -84,21 +83,6 @@ void setup() {
      .setValue(0)
      ;
 
-  /*PImage[] imgs = {loadImage("button_a.png"),loadImage("button_b.png"),loadImage("button_c.png")};
-  cp5.addButton("play")
-     .setValue(128)
-     .setPosition(140,300)
-     .setImages(imgs)
-     .updateSize()
-     ;
-     
-  cp5.addButton("playAgain")
-     .setValue(128)
-     .setPosition(210,300)
-     .setImages(imgs)
-     .updateSize()
-     ;*/
-
 }
 
 void draw() {
@@ -112,30 +96,18 @@ public void controlEvent(ControlEvent theEvent) {
   n = 0;
 }
 
-// function colorA will receive changes from 
-// controller with name colorA
 public void Up() {
   c1 = c2;
   c2 = color(0,160,100);
-  myPort.write('w');
-  /*if ( myPort.available() > 0) 
-  {  // If data is available,
-    val = myPort.readStringUntil('\n');         // read it and store it in val
-    println(val); //print it out in the console
-  }*/
-  
+  myPort.write('w'); 
 }
 
-// function colorB will receive changes from 
-// controller with name colorB
 public void Left() {
   c1 = c2;
   c2 = color(150,0,0);
   myPort.write('a');
 }
 
-// function colorC will receive changes from 
-// controller with name colorC
 public void Down() {
   c1 = c2;
   c2 = color(255,255,0);
@@ -158,8 +130,6 @@ public void Complete() {
   if ( myPort.available() > 0) 
   {  // If data is available,
     val = myPort.readStringUntil('+');         // read it and store it in val
-    //javax.swing.JOptionPane.showMessageDialog(null, val);
-    //println(val); //print it out in the console
     if(val != null){
       cp5.get(Textfield.class, "Info").setText(val);
     }
