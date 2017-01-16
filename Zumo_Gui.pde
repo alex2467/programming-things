@@ -1,3 +1,4 @@
+//Import serial and controlP5 libraries
 import processing.serial.*;
 import controlP5.*;
 
@@ -15,20 +16,26 @@ float n,n1;
 
 void setup() {
   
-  printArray(Serial.list());
+  //printArray(Serial.list());
   
+  //Connect to XBee port
   String portName = Serial.list()[2]; //change the 0 to a 1 or 2 etc. to match your port
   myPort = new Serial(this, portName, 9600);
   
+  //define size of window
   size(430,670);
   noStroke();
+  
+  //create ControlP5 Object
   cp5 = new ControlP5(this);
   
+  //Add a text field to gui to get serial text outputs
   cp5.addTextfield("Info")
      .setPosition(50,360)
      .setSize(330,30)
      ;
   
+  //Add buttons to gui to control the Zumo
   cp5.addButton("End")
      .setValue(0)
      .setPosition(220,265)
@@ -86,13 +93,14 @@ void setup() {
 }
 
 void draw() {
+  //Set the background colour
   background(myColor);
   myColor = lerpColor(c1,c2,n);
-  n += (1-n)* 0.1; 
+  n += (1-n)* 0.1;
 }
 
 public void controlEvent(ControlEvent theEvent) {
-  println(theEvent.getController().getName());
+  //println(theEvent.getController().getName());
   n = 0;
 }
 
@@ -164,7 +172,7 @@ public void End() {
   }
 }
 
-
+//Get key inputs and call the correct functions
 void keyPressed() {
   if (key == 'w') {
     Up();
